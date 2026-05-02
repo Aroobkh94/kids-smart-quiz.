@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نادي أرووب للمبدعين - ألعاب وذكاء</title>
+    <style>
+        body { background-color: #fdfbf7; color: #333; font-family: 'Cairo', sans-serif; text-align: center; padding: 0; margin: 0; }
+        .header { background: linear-gradient(45deg, #D4AF37, #000); color: white; padding: 30px; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .container { padding: 20px; max-width: 600px; margin: auto; }
+        .card { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-top: -30px; border: 2px solid #D4AF37; }
+        .btn { background: #D4AF37; color: black; border: none; padding: 15px 30px; border-radius: 50px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%; margin: 10px 0; }
+        .btn:hover { transform: scale(1.05); background: #000; color: #D4AF37; }
+        #quiz-box { display: none; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>نادي أرووب للمبدعين 🌟</h1>
+    <p>أهلاً بكم في عالم الذكاء والمرح</p>
+</div>
+
+<div class="container">
+    <div class="card" id="start-card">
+        <h3>هل أنت مستعد للتحدي؟</h3>
+        <p>اختبر ذكاءك في الألوان والنسب المئوية مع أرووب</p>
+        <button class="btn" onclick="startQuiz()">ابدأ اللعب الآن 🚀</button>
+    </div>
+    
+    <div id="quiz-box" class="card">
+        <h2 id="question">جاري التحميل...</h2>
+        <div id="options"></div>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        { q: "ما هو لون السماء في يوم مشمس؟", options: ["أزرق", "أخضر"], a: "أزرق" },
+        { q: "معك 20 قطعة حلوى، أعطيت صديقك 50% منها، كم بقي معك؟", options: ["10", "5"], a: "10" },
+        { q: "لون الموز هو...", options: ["أصفر", "أحمر"], a: "أصفر" }
+    ];
+    let current = 0;
+
+    function startQuiz() {
+        document.getElementById('start-card').style.display = 'none';
+        document.getElementById('quiz-box').style.display = 'block';
+        showQuestion();
+    }
+
+    function showQuestion() {
+        document.getElementById('question').innerText = quizData[current].q;
+        let btns = "";
+        quizData[current].options.forEach(opt => {
+            btns += `<button class="btn" onclick="check('${opt}')">${opt}</button>`;
+        });
+        document.getElementById('options').innerHTML = btns;
+    }
+
+    function check(ans) {
+        if(ans === quizData[current].a) alert("أحسنت! أنت ذكي جداً 🏆");
+        else alert("حاول مرة أخرى يا بطل 💪");
+        current++;
+        if(current < quizData.length) showQuestion();
+        else document.getElementById('quiz-box').innerHTML = "<h2>مبروك! انتهيت من التحدي 🎉</h2>";
+    }
+</script>
+
+</body>
+</html>
